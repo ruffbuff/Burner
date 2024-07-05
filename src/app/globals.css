@@ -8,6 +8,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --background-classic: #d3d3d3;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -139,4 +140,16 @@ a {
   0% { border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); }
   50% { border-image-source: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red); }
   100% { border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); }
+}
+
+@keyframes shine {
+  0% {
+      left: -100%;
+  }
+  20% {
+      left: 100%;
+  }
+  100% {
+      left: 100%;
+  }
 }

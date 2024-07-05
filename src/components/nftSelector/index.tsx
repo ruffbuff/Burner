@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Box, Grid, Image, Button, HStack } from '@chakra-ui/react';
 import useBurnNFT from '@/hooks/useBurnNFT';
 import { NFT } from '@/types/NFT';
+import styles from './style.module.css';
 
 interface NftSelectorProps {
     nfts: NFT[];
@@ -58,28 +59,9 @@ const NftSelector: React.FC<NftSelectorProps> = ({ nfts, collectionAddress, isCo
 
     return (
         <>
-            <Box
-                alignItems="center"
-                justifyContent="center"
-                bg="dark.600"
-                w="full"
-                p={2}
-                mt="0.5rem"
-                position="sticky"
-                top={0}
-                left="0"
-                right="0"
-                bottom="0"
-                zIndex={1}
-                borderRadius="md"
-                border="3px solid transparent"
-                sx={{
-                    borderImageSlice: 1,
-                    animation: "borderFlow 4s linear infinite"
-                }}
-            >
+            <Box className={styles.stickyHeader}>
                 <HStack justifyContent="center" alignItems="center" spacing={2}>
-                    <Box bg="orange.500" p={2} borderRadius="md">
+                    <Box className={styles.selectedCounter}>
                         <Text fontSize="md" color="white">{`Selected NFTs: ${selectedNfts.length}`}</Text>
                     </Box>
                     <Button
@@ -101,22 +83,17 @@ const NftSelector: React.FC<NftSelectorProps> = ({ nfts, collectionAddress, isCo
                     </Button>
                 </HStack>
             </Box>
-            <Box bg="dark.500" w="full" borderRadius="md" px={2} py={2} mt="1rem" overflowY="auto" h="calc(100vh - 198px)">
-                <Grid templateColumns="repeat(3, 1fr)" gap={4} p={2}>
+            <Box className={styles.nftGrid}>
+                <Grid templateColumns="repeat(4, 1fr)" gap={4} p={2}>
                     {nfts.map((nft, index) => (
                         <Box
                             key={index}
-                            borderRadius="md"
-                            overflow="hidden"
-                            cursor="pointer"
+                            className={`${styles.nftItem} ${selectedNfts.includes(nft.id.tokenId) ? styles.selected : ''}`}
                             onClick={() => handleNftSelect(nft.id.tokenId)}
-                            _active={{ transform: "scale(0.98)", border: "6px solid", borderColor: "red.500" }}
-                            bg={selectedNfts.includes(nft.id.tokenId) ? "gray.500" : "gray.100"}
-                            border={selectedNfts.includes(nft.id.tokenId) ? "6px solid" : "none"}
-                            borderColor={selectedNfts.includes(nft.id.tokenId) ? "red" : "none"}
+                            maxW={150}
                         >
-                            <Image src={nft.media[0].gateway} alt={`NFT Image ${nft.id.tokenId}`} boxSize="100%" objectFit="cover" />
-                            <Text p={2}>{nft.title}</Text>
+                            <Image src={nft.media[0].gateway} alt={`NFT Image ${nft.id.tokenId}`} className={styles.nftImage} />
+                            <Text className={styles.nftTitle}>{nft.title}</Text>
                         </Box>
                     ))}
                 </Grid>

@@ -1,0 +1,61 @@
+/* src/components/nftSelector/style.module.css */
+.stickyHeader {
+    align-items: center;
+    justify-content: center;
+    background-color: var(--chakra-colors-dark-600);
+    width: 100%;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    border-radius: var(--chakra-radii-md);
+    border: transparent;
+}
+
+.selectedCounter {
+    background-color: var(--chakra-colors-orange-500);
+    padding: 0.5rem;
+    border-radius: var(--chakra-radii-md);
+}
+
+.nftGrid {
+    background-color: var(--chakra-colors-dark-500);
+    width: 100%;
+    border-radius: var(--chakra-radii-md);
+    overflow-y: auto;
+    height: calc(100vh - 548px);
+}
+
+.nftItem {
+    border-radius: var(--chakra-radii-md);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.nftItem:active {
+    transform: scale(0.98);
+    border: 6px solid var(--chakra-colors-red-500);
+}
+
+.nftItem.selected {
+    background-color: var(--chakra-colors-gray-500);
+    border: 6px solid var(--chakra-colors-red-500);
+}
+
+.nftItem:not(.selected) {
+    background-color: var(--chakra-colors-gray-100);
+    border: none;
+}
+
+.nftImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nftTitle {
+    padding: 0.5rem;
+}

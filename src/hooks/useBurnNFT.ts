@@ -39,7 +39,7 @@ const useBurnNFT = () => {
 
     const checkApproval = async (web3: Web3, nftAddress: string, ownerAddress: string) => {
         try {
-            const nftContract = new web3.eth.Contract(erc721Abi, nftAddress); // Здесь используем правильный ABI для ERC721
+            const nftContract = new web3.eth.Contract(erc721Abi, nftAddress);
             return await nftContract.methods.isApprovedForAll(ownerAddress, burnerAddress).call();
         } catch (err) {
             throw new Error(`Failed to check approval: ${err}`);
@@ -48,7 +48,7 @@ const useBurnNFT = () => {
 
     const approveAll = async (web3: Web3, nftAddress: string, ownerAddress: string) => {
         try {
-            const nftContract = new web3.eth.Contract(erc721Abi, nftAddress); // Здесь используем правильный ABI для ERC721
+            const nftContract = new web3.eth.Contract(erc721Abi, nftAddress);
             const approvalResponse = await nftContract.methods.setApprovalForAll(burnerAddress, true).send({ from: ownerAddress });
             return approvalResponse;
         } catch (err) {
@@ -56,7 +56,6 @@ const useBurnNFT = () => {
         }
     };
 
-    // ABI для ERC721 контракта
     const erc721Abi = [
         {
             "constant": true,

@@ -1,4 +1,4 @@
-// src/hooks/useAlchemyRequest.tsx
+// src/hooks/useAlchemyRequest.ts
 import { useState, useEffect } from 'react';
 import { NFT } from '@/types/NFT';
 

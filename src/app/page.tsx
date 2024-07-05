@@ -1,6 +1,6 @@
 // src/app/page.tsx
 import React from 'react';
-import AlchemyRequest from '@/components/AlchemyRequest';
+import AlchemyRequest from '@/components/alchemyRequest';
 
 export default function Burner() {
     return (
