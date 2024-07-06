@@ -98,15 +98,7 @@ const NftSelector: React.FC<NftSelectorProps> = ({ nfts, collectionAddress, isCo
                             maxW={150}
                         >
                             <Skeleton isLoaded={loadedImages[nft.id.tokenId]} height="150px" width="150px">
-                                <Image 
-                                    src={nft.media[0].gateway} 
-                                    alt={`NFT Image ${nft.id.tokenId}`} 
-                                    className={styles.nftImage}
-                                    onLoad={() => handleImageLoad(nft.id.tokenId)}
-                                    objectFit="cover"
-                                    height="150px"
-                                    width="150px"
-                                />
+                                <Image src={nft.media[0].gateway} onLoad={() => handleImageLoad(nft.id.tokenId)} alt={`NFT Image ${nft.id.tokenId}`} className={styles.nftImage} />
                             </Skeleton>
                             <Text className={styles.nftTitle}>{nft.title}</Text>
                         </Box>
