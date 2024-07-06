@@ -26,7 +26,7 @@
     width: 100%;
     border-radius: var(--chakra-radii-md);
     overflow-y: auto;
-    height: calc(100vh - 548px);
+    height: calc(100vh - 308px);
 }
 
 .nftItem {

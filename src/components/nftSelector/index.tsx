@@ -1,6 +1,6 @@
 // src/components/NftSelector.tsx
 import React, { useState, useEffect } from 'react';
-import { Text, Box, Grid, Image, Button, HStack } from '@chakra-ui/react';
+import { Text, Box, Grid, Image, Button, HStack, Skeleton } from '@chakra-ui/react';
 import useBurnNFT from '@/hooks/useBurnNFT';
 import { NFT } from '@/types/NFT';
 import styles from './style.module.css';
@@ -16,6 +16,7 @@ const NftSelector: React.FC<NftSelectorProps> = ({ nfts, collectionAddress, isCo
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const { isLoading: burnLoading, error: burnError, burnNFT } = useBurnNFT();
     const [selectAll, setSelectAll] = useState(false);
+    const [loadedImages, setLoadedImages] = useState<{ [key: string]: boolean }>({});
 
     const handleBurnClick = async () => {
         if (selectedNfts.length > 0) {
@@ -46,6 +47,10 @@ const NftSelector: React.FC<NftSelectorProps> = ({ nfts, collectionAddress, isCo
             setSelectedNfts(nfts.map(nft => nft.id.tokenId));
         }
         setSelectAll(prevSelectAll => !prevSelectAll);
+    };
+
+    const handleImageLoad = (tokenId: string) => {
+        setLoadedImages(prev => ({ ...prev, [tokenId]: true }));
     };
 
     useEffect(() => {
@@ -92,7 +97,17 @@ const NftSelector: React.FC<NftSelectorProps> = ({ nfts, collectionAddress, isCo
                             onClick={() => handleNftSelect(nft.id.tokenId)}
                             maxW={150}
                         >
-                            <Image src={nft.media[0].gateway} alt={`NFT Image ${nft.id.tokenId}`} className={styles.nftImage} />
+                            <Skeleton isLoaded={loadedImages[nft.id.tokenId]} height="150px" width="150px">
+                                <Image 
+                                    src={nft.media[0].gateway} 
+                                    alt={`NFT Image ${nft.id.tokenId}`} 
+                                    className={styles.nftImage}
+                                    onLoad={() => handleImageLoad(nft.id.tokenId)}
+                                    objectFit="cover"
+                                    height="150px"
+                                    width="150px"
+                                />
+                            </Skeleton>
                             <Text className={styles.nftTitle}>{nft.title}</Text>
                         </Box>
                     ))}
